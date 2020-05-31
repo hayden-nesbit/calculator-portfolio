@@ -1,13 +1,19 @@
-/* #buttons {
+#buttons {
     min-height: 70px;
     max-height: 70px;
     min-width: 70px;
     max-width: 70px;
 }
 
-#buttonRow{
-    min-width: 300px;
-    max-width: 300px;
-    min-height: 300px;
-    max-height: 300px;
-} */
+#buttonRow {
+    min-height: 280px;
+    max-height: 280px;
+    min-width: 280px;
+    max-width: 280px;
+}
+
+#display {
+    min-width: 280px;
+    max-width: 280px;
+    overflow: auto;
+}
