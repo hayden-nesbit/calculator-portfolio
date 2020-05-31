@@ -8,7 +8,6 @@ function Calculator() {
     const [operator, setOperator] = useState("");
     const [firstNum, setFirstNum] = useState("0");
     const [secondNum, setSecondNum] = useState("0");
-    const [decimal, setDecimal] = useState(false)
 
 
     let buttons = [
@@ -20,7 +19,6 @@ function Calculator() {
     ]
 
     function calculate(special) {
-
 
         let setMath = operator === "x" ? firstNum * secondNum :
                       operator === "+" ? +firstNum + +secondNum :
@@ -36,10 +34,8 @@ function Calculator() {
     }
 
     function pushButton(item) {
-
-        let currentDecimal = item === "." ? true : false
-        setDecimal(currentDecimal)
         
+    
         let operators = "+x/-=";
         let arr = []
 
@@ -54,12 +50,13 @@ function Calculator() {
             }
         }
 
-
         if (item === "%" || item === "+/-") {
             calculate(item)
-        }
 
-        else if (item === "C") {
+        } else if (item === "." && numStr.includes(".")) {
+            return
+        
+         } else if (item === "C") {
             setNumStr("0")
             setDisplay("0");
             setFirstNum("0");
@@ -72,7 +69,7 @@ function Calculator() {
             item === "x" ||
             item === "/" ) &&
             !operator ) {
-            if (numStr == "0") {
+            if (numStr == "0" ) {
                 setNumStr(item)
                 setDisplay(item)
                 setFirstNum(item)
