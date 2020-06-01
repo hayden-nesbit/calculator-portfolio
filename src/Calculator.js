@@ -11,6 +11,8 @@ function Calculator() {
 
     console.log({ numStr })
     console.log({ firstNum })
+    console.log({ secondNum })
+    console.log({ operator })
 
     let buttons = [
         "C", "+/-", "%", "/",
@@ -35,6 +37,7 @@ function Calculator() {
             setSecondNum("0")
             
         } else {
+            setNumStr(setMath.toString())
             setDisplay(setMath.toString())
             setFirstNum(setMath.toString())
             setSecondNum("0")
@@ -60,6 +63,7 @@ function Calculator() {
         }
 
         if (item === "%" || item === "+/-") {
+            setOperator("")
             calculate(item)
 
         } else if ((item === "=" || item === "+" || item === "-" || item === "x" || item === "/") && firstNum === "0") {
