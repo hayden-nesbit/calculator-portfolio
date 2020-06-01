@@ -17,3 +17,8 @@
     max-width: 280px;
     overflow: auto;
 }
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+  }

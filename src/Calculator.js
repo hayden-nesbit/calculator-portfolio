@@ -76,7 +76,6 @@ function Calculator() {
 
         } else if (item === "=" && secondNum === "0") {
                 setDisplay(firstNum)
-                // setSecondNum("0")
         
 
         } else if (item === "C") {
@@ -139,9 +138,9 @@ function Calculator() {
 
     let board = buttons.map((item, index) => {
         return (
-            <div id="buttons" key={index} className={item === "+" || item === "-" || item === "=" || item === "/" || item === "x" ? "col-3 border border-dark bg-warning" : item === "%" || item === "C" || item === "+/-" ? "col-3 border border-secondary bg-dark" : "col-3 border border-dark bg-secondary"}>
+            <button id="buttons" key={index} className={item === "+" || item === "-" || item === "=" || item === "/" || item === "x" ? "btn border border-dark bg-warning rounded-0" : item === "%" || item === "C" || item === "+/-" ? "btn border border-secondary bg-dark rounded-0" : "btn border border-dark bg-secondary rounded-0"}>
                 <h3 className="mt-3 text-white" onClick={() => pushButton(item)}>{item}</h3>
-            </div>
+            </button>
         )
     })
 
