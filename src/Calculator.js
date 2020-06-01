@@ -9,6 +9,8 @@ function Calculator() {
     const [firstNum, setFirstNum] = useState("0");
     const [secondNum, setSecondNum] = useState("0");
 
+    console.log({ numStr })
+    console.log({ firstNum })
 
     let buttons = [
         "C", "+/-", "%", "/",
@@ -23,19 +25,26 @@ function Calculator() {
         let setMath = operator === "x" ? firstNum * secondNum :
                       operator === "+" ? +firstNum + +secondNum :
                       operator === "-" ? firstNum - secondNum :
-                      operator === "/" ? firstNum / secondNum : 
+                      operator === "/" ? firstNum / secondNum :
                       special === "%" ? firstNum / 100 :
                       special === "+/-" ? firstNum * -1 : null
 
-        setDisplay(setMath.toString())
-        setFirstNum(setMath.toString())
-        setSecondNum("0")
+        if (setMath.toString() === "Infinity" || setMath.toString() === "NaN") {
+            setDisplay("Error")
+            setFirstNum("Error")
+            setSecondNum("0")
+            
+        } else {
+            setDisplay(setMath.toString())
+            setFirstNum(setMath.toString())
+            setSecondNum("0")
+        }
 
     }
 
     function pushButton(item) {
-        
-    
+
+
         let operators = "+x/-=";
         let arr = []
 
@@ -53,10 +62,24 @@ function Calculator() {
         if (item === "%" || item === "+/-") {
             calculate(item)
 
+        } else if ((item === "=" || item === "+" || item === "-" || item === "x" || item === "/") && firstNum === "0") {
+            return
+
         } else if (item === "." && numStr.includes(".")) {
             return
+
+        } else if (item === "." && numStr === "0") {
+                setDisplay("0.")
+                setNumStr("0.")
+                setFirstNum("0.")
+                setSecondNum("0")
+
+        } else if (item === "=" && secondNum === "0") {
+                setDisplay(firstNum)
+                // setSecondNum("0")
         
-         } else if (item === "C") {
+
+        } else if (item === "C") {
             setNumStr("0")
             setDisplay("0");
             setFirstNum("0");
@@ -67,9 +90,9 @@ function Calculator() {
             item === "+" ||
             item === "-" ||
             item === "x" ||
-            item === "/" ) &&
-            !operator ) {
-            if (numStr == "0" ) {
+            item === "/") &&
+            !operator) {
+            if (numStr == "0") {
                 setNumStr(item)
                 setDisplay(item)
                 setFirstNum(item)
@@ -92,8 +115,10 @@ function Calculator() {
 
 
         } else if ((item === "=" || item === "+" || item === "-" || item === "x" || item === "/") && !operator) {
+
             setNumStr("0")
             setOperator(item)
+
 
         } else if ((item === "=" || item === "+" || item === "-" || item === "x" || item === "/") && operator) {
             if (item === "+" || item === "-" || item === "x" || item === "/") {
@@ -107,9 +132,9 @@ function Calculator() {
                 setFirstNum(secondNum)
                 calculate()
             }
-        
+
+        }
     }
-}
 
 
     let board = buttons.map((item, index) => {
@@ -124,21 +149,21 @@ function Calculator() {
         <div className="container mt-5 p-5">
             <div className="row">
                 <div className="col-md-4 offset-4 text-center">
-                        <div className="row">
-                            <div id="display" className="col-12 text-right bg-dark">
-                                <h1 className="display-3 mb-0 text-white">{display}</h1>
-                            </div>
+                    <div className="row">
+                        <div id="display" className="col-12 text-right bg-dark">
+                            <h1 className="display-3 mb-0 text-white">{display}</h1>
                         </div>
-                        <div className="row">
-                            <div id="buttonRow" className="col-12">
-                                <div  className="row">
-                                    {board}
-                                </div>
+                    </div>
+                    <div className="row">
+                        <div id="buttonRow" className="col-12">
+                            <div className="row">
+                                {board}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     )
 }
 
